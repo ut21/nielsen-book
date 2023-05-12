@@ -1,0 +1,72 @@
+\documentclass[18pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Neural Network and Deep Learning, \\ Micahel Nielsen, Chapter 1}
+\author{Utkarsh Tiwari}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Sigmoid neurons simulating perceptrons, part I} \\
+Question 1: Suppose we take all the weights and biases in a network of perceptrons, and multiply them by a positive constant, $c>0$
+. Show that the behaviour of the network doesn't change. \\ \\
+Solution: for perceptrons: $$
+output=f(w,x,b)=
+\begin{cases}
+0 & \text{if } w\cdot x+b \leq 0 \\
+1 & \text{if } w\cdot x+b > 0
+\end{cases}
+$$ 
+where $b \equiv -\text{threshold}$,
+$w \cdot x \equiv \sum_{j} w_j x_j, \text{ where } w \text{ and } x \text{ are weight and input vectors respectively.}$
+\\
+After multiplying with a positive constant $c>0$: $$
+output=f(w,x,b)=
+\begin{cases}
+0 & \text{if } cw\cdot x+cb \leq 0 \\
+1 & \text{if } cw\cdot x+cb > 0
+\end{cases}
+$$
+$$
+=output=f(w,x,b)=
+\begin{cases}
+0 & \text{if } c(w\cdot x+b) \leq 0 \\
+1 & \text{if } c(w\cdot x+b) > 0
+\end{cases}
+$$
+$$
+=output=f(w,x,b)=
+\begin{cases}
+0 & \text{if } (w\cdot x+b) \leq 0 \\
+1 & \text{if } (w\cdot x+b) > 0
+\end{cases}
+$$
+
+\textbf{Q.E.D}
+
+\\
+\textbf{Sigmoid neurons simulating perceptrons, part II} \\
+
+Question 2: Suppose we have the same setup as the last problem - a network of perceptrons. Suppose also that the overall input to the network of perceptrons has been chosen. We won't need the actual input value, we just need the input to have been fixed. Suppose the weights and biases are such that $w \cdot x + b \neq 0$
+ for the input $x$ to any particular perceptron in the network. Now replace all the perceptrons in the network by sigmoid neurons, and multiply the weights and biases by a positive constant $c>0$
+. Show that in the limit as $c \rightarrow \infty$
+ the behaviour of this network of sigmoid neurons is exactly the same as the network of perceptrons. How can this fail when $w⋅x+b=0$
+ for one of the perceptrons? \\ \\
+Solution: For Sigmoid Neurons:
+$$
+output=f(w,x,b)= \sigma(-w\cdot x-b)
+$$ 
+where, $$
+\sigma(z)=\frac{1}{1 + e^{-z}}
+$$
+\textbf{Assumption}:
+Assume that $x$ is a fixed unknown value where $w \cdot x + b \neq 0$. Then the resulting network will remain unchanged (assuming $c > 0$) as $c \rightarrow \infty$.
+
+\textbf{Case 1}:$$w \cdot x + b < 0:$$\\
+$$output=\lim_{c \rightarrow \infty} \frac{1}{1 + e^{c(-w\cdot x-b)}}$$
+$$output=$$
+
+
+\end{document}
