@@ -4,8 +4,9 @@
 \graphicspath{{./images/}}
 \usepackage{subcaption}
 
-\title{Neural Network and Deep Learning, \\ Micahel Nielsen, Chapter 1}
+\title{Neural Network and Deep Learning, \\ Micahel Nielsen, Chapter 1 \\Solutions}
 \author{Utkarsh Tiwari}
+\date{}
 
 \begin{document}
 
@@ -45,10 +46,10 @@ $$
 1 & \text{if } (w\cdot x+b) > 0
 \end{cases}
 $$
-
-\textbf{Q.E.D}
-
 \\
+\textbf{Q.E.D}
+\\
+
 \textbf{Sigmoid neurons simulating perceptrons, part II} \\
 
 Question 2: Suppose we have the same setup as the last problem - a network of perceptrons. Suppose also that the overall input to the network of perceptrons has been chosen. We won't need the actual input value, we just need the input to have been fixed. Suppose the weights and biases are such that $w \cdot x + b \neq 0$
@@ -115,6 +116,56 @@ If the input(s) of the sigmoid function is multiplied by a positive constant $c$
 
 So, we can see that as $c \rightarrow \infty$ the activation function on the sigmoid neurons starts resembling the step function. Hence, there is no difference between the two under the given condition. \textbf{Q.E.D}\\
 Also, because the step function is undefined for $x=0$ we cannot comment whether the above proved statement holds when $w\cdot x + b = 0$.
+\\
+
+\textbf{Question 3, Architecture:}\\
+Question: There is a way of determining the bitwise representation of a digit by adding an extra layer to the three-layer network above. The extra layer converts the output from the previous layer into a binary representation, as illustrated in the figure below. Find a set of weights and biases for the new output layer. Assume that the first 3
+ layers of neurons are such that the correct output in the third layer (i.e., the old output layer) has activation at least 0.99
+, and incorrect outputs have activation less than 0.01
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/arch_ex.png}
+    \label{fig:my_label}
+\end{figure}
+\\
+\\
+Solution: We are dealing with conversions from base 10 to base 2 values. The motivation behind this comes from the fact that if the output neurons correspond to binary bits instead of decimal digits we could get upto 10 possible digits $(0_{10}$ to $9_{10})$ using only 4 output neurons.\\
+The first node could classify whether the number is even or odd respectively, i.e., it denotes whether the last bit is 0 or 1 (convince youself this is true). A bias in this case in unnecessary because $w\cdot x$ will either be 0 or 1. Hence the weights for the first neuron are:
+$$w_9=1$$
+$$w_8=0$$
+$$w_7=1$$
+$$w_6=0$$
+$$w_5=1$$
+$$w_4=0$$
+$$w_3=1$$
+$$w_2=0$$
+$$w_1=1$$
+
+Which is to say that the neuron outputs 0 for even numbers, and 1 for odd numbers.
+
+Similarly the second neuron (denoting the second to rightmost bit) should be 1 only for {2,3,6,7} and so their weights would be 1 while all other weights would be 0.
+
+Similarly the second neuron (denoting the second to leftmost bit) should be 1 only for {4,5,6,7} and so their weights would be 1 while all other weights would be 0.
+
+The last neuron would be 1 only for {8,9}, so their weights should be 1 while all other are 0.
+
+\bigbreak
+\textbf{Gradient Descent and learning rate}:
+
+Question 3: 
+\begin{quote}
+    Indeed, there's even a sense in which gradient descent is the optimal strategy for searching for a minimum. Let's suppose that we're trying to make a move $\Delta v$ in position so as to decrease $C$ as much as possible. This is equivalent to minimizing $\Delta C \approx \nabla C \cdot \Delta v$. We'll constrain the size of the move so that $\|\Delta v\|=\epsilon$ for some small fixed $\epsilon>0$. In other words, we want a move that is a small step of a fixed size, and we're trying to find the movement direction which decreases $C$ as much as possible. It can be proved that the choice of $\Delta v$ which minimizes $\nabla C \cdot \Delta v$ is $\Delta v=-\eta \nabla C$, where $\eta=\epsilon/\|\nabla C\|$ is determined by the size constraint $\|\Delta v\|=\epsilon$. So gradient descent can be viewed as a way of taking small steps in the direction which does the most to immediately decrease $C$.
+\end{quote}
+Prove the assertion of the last paragraph. Hint: If you're not already familiar with the Cauchy-Schwarz inequality, you may find it helpful to familiarize yourself with it.\\
+Solution: \\
+Cauchy-Schwarz inequality states that 
+for any vectors $\mathbf{u}$ and $\mathbf{v}$ in an inner product space, we have
+\begin{equation}
+    \left|\langle \mathbf{u}, \mathbf{v}\rangle \right| \leq \|\mathbf{u}\| \|\mathbf{v}\|,
+\end{equation}
+where $\langle \cdot, \cdot \rangle$ denotes the inner product and $\|\cdot\|$ denotes the norm.
+
+
 
 
 \end{document}
